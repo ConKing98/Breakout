@@ -1,4 +1,4 @@
-OUTPUT = main
+OUTPUT = Breakout
 
 OBJDIR = obj
 SRCDIR = src
