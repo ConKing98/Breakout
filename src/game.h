@@ -1,5 +1,7 @@
 #pragma once
 
+#include "sprite.h"
+
 enum GameState {
     ACTIVE,
     MENU,
@@ -14,11 +16,14 @@ public:
 
     void init();
     void processInput(float dt);
+    void processKey(int key, int action);
     void update(float dt);
     void render();
 
-    GameState state;
-    unsigned width;
-    unsigned height;
-    bool keys[1024];
+private:
+    GameState m_state;
+    unsigned m_width;
+    unsigned m_height;
+    bool m_keys[1024];
+    Sprite *m_sprite = nullptr;
 };

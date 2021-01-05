@@ -69,6 +69,7 @@ int main(int argc, char *argv[]) {
     }
 
     ResourceManager::getInstance().clear();
+    Breakout.~Game();
 
     glfwTerminate();
     return 0;
@@ -83,11 +84,5 @@ void keyCallback(GLFWwindow* window, int key, int escancode, int action, int mod
         glfwSetWindowShouldClose(window, true);
     }
 
-    if (key >= 0 && key < 1024) {
-        if (action == GLFW_PRESS) {
-            Breakout.keys[key] = true;
-        } else if (action == GLFW_RELEASE) {
-            Breakout.keys[key] = false;
-        }
-    }
+    Breakout.processKey(key, action);
 }
