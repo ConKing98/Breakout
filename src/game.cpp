@@ -10,9 +10,9 @@ Game::Game(unsigned width, unsigned height)
 { }
 
 Game::~Game() {
-    if (m_sprite)
-        delete m_sprite;
-    m_sprite = nullptr;
+    if (m_objectRenderer)
+        delete m_objectRenderer;
+    m_objectRenderer = nullptr;
 }
 
 void Game::init() {
@@ -25,7 +25,7 @@ void Game::init() {
     shader.setUniform("projection", projection);
     shader.setUniform("image", 0);
 
-    m_sprite = new Sprite(shader);
+    m_objectRenderer = new ObjectRenderer(shader);
     rm.loadTexture("circle", "textures/circle.png", true);
 }
 
@@ -48,6 +48,6 @@ void Game::update(float dt) {
 }
 
 void Game::render() {
-    m_sprite->draw(ResourceManager::getInstance().getTexture("circle"),
+    m_objectRenderer->render(ResourceManager::getInstance().getTexture("circle"),
         glm::vec2(200.0f, 200.0f), glm::vec2(300.0f, 400.0f), 45.0f, glm::vec3(0.0f, 1.0f, 0.0f));
 }

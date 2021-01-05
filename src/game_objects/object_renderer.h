@@ -3,15 +3,15 @@
 #include <glad/glad.h>
 #include <GLFW/glfw3.h>
 
-#include "resource/shader/shader.h"
-#include "resource/texture/texture2D.h"
+#include "../resource/shader/shader.h"
+#include "../resource/texture/texture2D.h"
 
-class Sprite {
+class ObjectRenderer {
 public:
-    Sprite(Shader &shader);
-    ~Sprite();
+    ObjectRenderer(Shader &shader);
+    ~ObjectRenderer();
 
-    void draw(
+    void render(
         Texture2D &texture,
         const glm::vec2 &position,
         glm::vec2 size = glm::vec2(10.0f, 10.0f),

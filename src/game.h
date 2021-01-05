@@ -1,6 +1,6 @@
 #pragma once
 
-#include "sprite.h"
+#include "game_objects/object_renderer.h"
 
 enum GameState {
     ACTIVE,
@@ -25,5 +25,5 @@ private:
     unsigned m_width;
     unsigned m_height;
     bool m_keys[1024];
-    Sprite *m_sprite = nullptr;
+    ObjectRenderer *m_objectRenderer = nullptr;
 };

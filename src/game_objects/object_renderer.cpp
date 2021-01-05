@@ -1,15 +1,15 @@
-#include "sprite.h"
+#include "object_renderer.h"
 
-Sprite::Sprite(Shader &shader) : m_shader(shader) {
+ObjectRenderer::ObjectRenderer(Shader &shader) : m_shader(shader) {
     initRenderData();
 }
 
-Sprite::~Sprite() {
+ObjectRenderer::~ObjectRenderer() {
     glDeleteBuffers(1, &m_VBO);
     glDeleteVertexArrays(1, &m_VAO);
 }
 
-void Sprite::draw(
+void ObjectRenderer::render(
     Texture2D &texture,
     const glm::vec2 &position,
     glm::vec2 size,
@@ -18,13 +18,13 @@ void Sprite::draw(
 ) {
     m_shader.use();
     glm::mat4 model = glm::mat4(1.0f);
-    // Translate the sprite.
+    // Translate.
     model = glm::translate(model, glm::vec3(position, 0.0f));
-    // Rotate the sprite. Translate first to shift the origin of rotation to the center.
+    // Rotate. Translate first to shift the origin of rotation to the center.
     model = glm::translate(model, glm::vec3(0.5f * size.x, 0.5f * size.y, 0.0f));
     model = glm::rotate(model, glm::radians(rotation), glm::vec3(0.0f, 0.0f, 1.0f));
     model = glm::translate(model, glm::vec3(-0.5f * size.x, -0.5f * size.y, 0.0f));
-    // Scale the sprite.
+    // Scale.
     model = glm::scale(model, glm::vec3(size, 1.0f));
 
     m_shader.setUniform("model", model);
@@ -38,7 +38,7 @@ void Sprite::draw(
     glBindVertexArray(0);
 }
 
-void Sprite::initRenderData() {
+void ObjectRenderer::initRenderData() {
     static const float vertices[] = {
         // pos      // texture
         0.0f, 1.0f, 0.0f, 1.0f,
