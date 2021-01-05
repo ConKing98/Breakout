@@ -2,7 +2,7 @@
 #include <GLFW/glfw3.h>
 
 #include "game.h"
-#include "rm/resourcemanager.h"
+#include "resource/resource_manager.h"
 
 //---------------------------------------------------------------------------//
 //      GLOBAL VARIABLES                                                     //
