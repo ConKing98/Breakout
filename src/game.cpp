@@ -136,3 +136,18 @@ bool Game::isColliding(const BaseGameObject &a, const BaseGameObject &b) {
     bool yCollision = aTopRight.y >= b.position().y && bTopRight.y >= a.position().y;
     return xCollision && yCollision;
 }
+
+bool Game::isColliding(const Ball &a, const BaseGameObject &b) {
+    // Implements AABB - AABB collision detection taking into account that the
+    // ball is in fact a circle and not a square
+    glm::vec2 ballCenter(a.position() + a.radius());
+    glm::vec2 bHalfDimmensions(b.size() / 2.0f);
+    glm::vec2 bCenter(b.position() + bHalfDimmensions);
+
+    glm::vec2 diff = ballCenter - bCenter;
+    glm::vec2 clampedDiff = glm::clamp(diff, -bHalfDimmensions, bHalfDimmensions);
+    glm::vec2 bClosestPoint = bCenter + clampedDiff;
+
+    diff = bClosestPoint - ballCenter;
+    return glm::length(diff) < a.radius();
+}

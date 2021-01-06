@@ -27,6 +27,7 @@ private:
     void handleCollisions();
 
     static bool isColliding(const BaseGameObject &a, const BaseGameObject &b);
+    static bool isColliding(const Ball &a, const BaseGameObject &b);
 
     GameState m_state;
     unsigned m_width;
