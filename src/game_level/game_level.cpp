@@ -79,10 +79,10 @@ void GameLevel::init(
             glm::vec2 size(widthRatio, heightRatio);
 
             if (tileData[y][x] == TileCodes::UNBREAKABLE) {
-                m_bricks.emplace_back(pos, size, textureUnbreakable, color);
+                m_bricks.emplace_back(textureUnbreakable, pos, size, color);
                 m_bricks.back().setUnbreakable(true);
             } else {
-                m_bricks.emplace_back(pos, size, textureNormal, color);
+                m_bricks.emplace_back(textureNormal, pos, size, color);
             }
         }
     }
@@ -91,7 +91,7 @@ void GameLevel::init(
 glm::vec3 GameLevel::colorForTileCode(int code) {
     switch (code) {
     case TileCodes::EMPTY:         return glm::vec3(-1.0f);
-    case TileCodes::UNBREAKABLE:   return glm::vec3(0.5f, 0.5f, 0.5f);
+    case TileCodes::UNBREAKABLE:   return glm::vec3(0.3f, 0.3f, 0.3f);
     case TileCodes::NORMAL_WHITE:  return glm::vec3(1.0f, 1.0f, 1.0f);
     case TileCodes::NORMAL_RED:    return glm::vec3(1.0f, 0.0f, 0.0f);
     case TileCodes::NORMAL_ORANGE: return glm::vec3(1.0f, 0.5f, 0.0f);

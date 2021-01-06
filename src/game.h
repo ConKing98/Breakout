@@ -28,5 +28,6 @@ private:
     bool m_keys[1024];
     std::vector<GameLevel> m_levels;
     unsigned m_currentLevel;
-    ObjectRenderer *m_objectRenderer = nullptr;
+    ObjectRenderer* m_objectRenderer = nullptr;
+    BaseGameObject* m_paddle = nullptr;
 };

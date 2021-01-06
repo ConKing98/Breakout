@@ -1,16 +1,9 @@
 #include "base_game_object.h"
 
-// BaseGameObject::BaseGameObject()
-//     : m_position(0.0f)
-//     , m_size(1.0f)
-//     , m_velocity(0.0f)
-//     , m_color(1.0f)
-// { }
-
 BaseGameObject::BaseGameObject(
+    Texture2D& texture,
     glm::vec2 pos,
     glm::vec2 size,
-    Texture2D& texture,
     glm::vec3 color,
     glm::vec2 velocity
 ) : m_position(pos)
