@@ -100,6 +100,7 @@ void Game::processKey(int key, int action) {
 
 void Game::update(float dt) {
     m_ball->move(dt, m_width);
+    handleCollisions();
 }
 
 void Game::render() {
@@ -117,4 +118,21 @@ void Game::render() {
         // Render the ball
         m_ball->render(*m_objectRenderer);
     }
+}
+
+void Game::handleCollisions() {
+    for (auto &brick : m_levels[m_currentLevel].bricks()) {
+        if (!brick.isUnbreakable() && !brick.isDestroyed()) {
+            brick.setDestroyed(isColliding(*m_ball, brick));
+        }
+    }
+}
+
+bool Game::isColliding(const BaseGameObject &a, const BaseGameObject &b) {
+    // Implements AABB - AABB collision detection
+    glm::vec2 aTopRight = a.position() + a.size();
+    glm::vec2 bTopRight = b.position() + b.size();
+    bool xCollision = aTopRight.x >= b.position().x && bTopRight.x >= a.position().x;
+    bool yCollision = aTopRight.y >= b.position().y && bTopRight.y >= a.position().y;
+    return xCollision && yCollision;
 }

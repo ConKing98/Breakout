@@ -24,6 +24,10 @@ public:
     void render();
 
 private:
+    void handleCollisions();
+
+    static bool isColliding(const BaseGameObject &a, const BaseGameObject &b);
+
     GameState m_state;
     unsigned m_width;
     unsigned m_height;

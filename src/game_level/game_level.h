@@ -28,6 +28,8 @@ public:
     void render(ObjectRenderer &renderer);
     bool isComplete() const;
 
+    std::vector<BaseGameObject>& bricks() { return m_bricks; };
+
 private:
     void init(std::vector<std::vector<unsigned>> tileData,
         unsigned levelWidth, unsigned levelHeight);
