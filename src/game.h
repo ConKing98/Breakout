@@ -2,6 +2,8 @@
 
 #include "game_level/game_level.h"
 #include "game_objects/object_renderer.h"
+#include "game_objects/paddle.h"
+#include "game_objects/ball.h"
 
 enum GameState {
     ACTIVE,
@@ -29,5 +31,6 @@ private:
     std::vector<GameLevel> m_levels;
     unsigned m_currentLevel;
     ObjectRenderer* m_objectRenderer = nullptr;
-    BaseGameObject* m_paddle = nullptr;
+    Paddle* m_paddle = nullptr;
+    Ball* m_ball = nullptr;
 };

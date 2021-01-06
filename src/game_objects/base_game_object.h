@@ -10,6 +10,7 @@ class BaseGameObject {
 public:
     BaseGameObject(Texture2D& texture, glm::vec2 pos, glm::vec2 size,
         glm::vec3 color = glm::vec3(1.0f), glm::vec2 velocity = glm::vec2(0.0f));
+    virtual ~BaseGameObject() { };
     
     virtual void render(ObjectRenderer &renderer);
 
@@ -31,7 +32,7 @@ public:
     bool isUnbreakable() const { return m_isUnbreakable; };
     bool isDestroyed() const { return m_isDestroyed; };
 
-private:
+protected:
     glm::vec2 m_position;
     glm::vec2 m_size;
     glm::vec2 m_velocity;
