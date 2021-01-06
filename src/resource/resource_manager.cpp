@@ -33,12 +33,11 @@ Shader& ResourceManager::getShader(const std::string &name) const {
 
 Texture2D& ResourceManager::loadTexture(
     const std::string &name,
-    const std::string &path,
-    bool alpha
+    const std::string &path
 ) {
     auto iter = m_textures.find(name);
     Texture2D* prior = (iter != m_textures.end()) ? (*iter).second : nullptr;
-    m_textures[name] = loadTextureFromFile(path, alpha);
+    m_textures[name] = loadTextureFromFile(path);
     delete prior;
     return *m_textures[name];
 }
@@ -89,13 +88,8 @@ Shader* ResourceManager::loadShaderFromFile(
     return shader;
 }
 
-Texture2D* ResourceManager::loadTextureFromFile(const std::string &path, bool alpha) {
+Texture2D* ResourceManager::loadTextureFromFile(const std::string &path) {
     Texture2D* texture = new Texture2D();
-    if (alpha) {
-        texture->setInternalFormat(GL_RGBA);
-        texture->setImageFormat(GL_RGBA);
-    }
-
     int width;
     int height;
     int numChannels;

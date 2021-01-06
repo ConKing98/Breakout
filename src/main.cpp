@@ -9,7 +9,7 @@
 //---------------------------------------------------------------------------//
 unsigned WINDOW_WIDTH = 800;
 unsigned WINDOW_HEIGHT = 600;
-Game Breakout(WINDOW_WIDTH, WINDOW_HEIGHT);
+Game* Breakout = nullptr;
 
 //---------------------------------------------------------------------------//
 //      FUNCTION PROTOTYPES                                                  //
@@ -47,7 +47,8 @@ int main(int argc, char *argv[]) {
         return 3;
     }
 
-    Breakout.init();
+    Breakout = new Game(WINDOW_WIDTH, WINDOW_HEIGHT);
+    Breakout->init();
 
     float deltaTime = 0.0f;
     float lastTime  = 0.0f;
@@ -57,19 +58,20 @@ int main(int argc, char *argv[]) {
         lastTime = currentTime;
         glfwPollEvents();
 
-        Breakout.processInput(deltaTime);
+        Breakout->processInput(deltaTime);
 
-        Breakout.update(deltaTime);
+        Breakout->update(deltaTime);
 
         glClearColor(0.0f, 0.0f, 0.0f, 1.0f);
         glClear(GL_COLOR_BUFFER_BIT);
-        Breakout.render();
+        Breakout->render();
 
         glfwSwapBuffers(window);
     }
 
     ResourceManager::getInstance().clear();
-    Breakout.~Game();
+    delete Breakout;
+    // Breakout.~Game();
 
     glfwTerminate();
     return 0;
@@ -84,5 +86,6 @@ void keyCallback(GLFWwindow* window, int key, int escancode, int action, int mod
         glfwSetWindowShouldClose(window, true);
     }
 
-    Breakout.processKey(key, action);
+    if (Breakout)
+        Breakout->processKey(key, action);
 }

@@ -1,5 +1,6 @@
 #pragma once
 
+#include "game_level/game_level.h"
 #include "game_objects/object_renderer.h"
 
 enum GameState {
@@ -25,5 +26,7 @@ private:
     unsigned m_width;
     unsigned m_height;
     bool m_keys[1024];
+    std::vector<GameLevel> m_levels;
+    unsigned m_currentLevel;
     ObjectRenderer *m_objectRenderer = nullptr;
 };

@@ -3,7 +3,7 @@
 #include "resource/resource_manager.h"
 
 Game::Game(unsigned width, unsigned height)
-    : m_state(GameState::MENU)
+    : m_state(GameState::ACTIVE)
     , m_width(width)
     , m_height(height)
     , m_keys()
@@ -26,7 +26,16 @@ void Game::init() {
     shader.setUniform("image", 0);
 
     m_objectRenderer = new ObjectRenderer(shader);
-    rm.loadTexture("circle", "textures/circle.png", true);
+
+    // Load textures
+    rm.loadTexture("normal_brick", "textures/brick.png");
+    rm.loadTexture("unbreakable_brick", "textures/unbreakable.png");
+    rm.loadTexture("background", "textures/background.png");
+    rm.loadTexture("circle", "textures/circle.png");
+
+    // Load levels
+    m_currentLevel = 0;
+    m_levels.emplace_back("levels/one.lvl", m_width, m_height >> 1);
 }
 
 void Game::processInput(float dt) {
@@ -48,6 +57,12 @@ void Game::update(float dt) {
 }
 
 void Game::render() {
-    m_objectRenderer->render(ResourceManager::getInstance().getTexture("circle"),
-        glm::vec2(200.0f, 200.0f), glm::vec2(300.0f, 400.0f), 45.0f, glm::vec3(0.0f, 1.0f, 0.0f));
+    if (m_state == GameState::ACTIVE) {
+        // Render the background
+        m_objectRenderer->render(ResourceManager::getInstance().getTexture("background"),
+            glm::vec2(0.0f), glm::vec2(m_width, m_height));
+        
+        // Render the level
+        m_levels[m_currentLevel].render(*m_objectRenderer);
+    }
 }
