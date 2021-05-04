@@ -7,7 +7,7 @@ INCDIR = include
 CC = gcc
 CXX = g++
 CFLAGS = -I$(INCDIR) -Wall -g
-CXXFLAGS = -I$(INCDIR) -Wall -g
+CXXFLAGS = -I$(INCDIR) -Wall -g -std=c++11
 LDFLAGS = -lglfw -lGL -lX11 -lpthread -lXrandr -lXi -ldl -lassimp
 
 CSRC = $(shell find $(SRCDIR) -type f -name "*.c")
