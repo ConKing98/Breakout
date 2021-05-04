@@ -7,7 +7,6 @@ Compilation requires C++11, GLAD, and GLFW. These may be avaialable through
 your OS package manager but can also be downloaded online.
 
 ## Status
----
 This project is currently a work in progress. The current development focus is
 related to frame-independant collision detection. While such a feature is not
 necessary, I find it to be an interesting challenge to tackle.
